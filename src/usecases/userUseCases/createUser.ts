@@ -1,5 +1,6 @@
 import { saveUser,findUserByEmail } from "../../repositories/userRepository";
 import {securePassword} from '../../services/bcrypt'
+import { formatDate } from "../../services/moment";
 
 export const createUser=async(
     username: string,
@@ -11,7 +12,8 @@ export const createUser=async(
     const existingUser = await findUserByEmail(email)
     if(!existingUser){
     const securedPassword = await securePassword(password)
-    return await saveUser(username,email,mobile,securedPassword,image)
+    const formattedDate = await formatDate(Date.now())
+    return await saveUser(username,email,mobile,securedPassword,image,formattedDate)
     }
     else{
         throw new Error("Email already exists in the database")

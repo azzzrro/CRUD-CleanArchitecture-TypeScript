@@ -3,13 +3,15 @@ import {createUser} from '../../usecases/userUseCases/createUser'
 import {loginUser} from '../../usecases/userUseCases/loginUser'
 import { LoginResponse } from '../../usecases/userUseCases/loginUser'
 import { findUser } from '../../usecases/userUseCases/findUser'
+import { updateUser } from '../../usecases/userUseCases/updateUser'
 
 export const userSignup =  async(req:Request,res:Response)=>{
     try {
         const {username,email,mobile,password} = req.body
         const image = req.file?.filename
-        await createUser(username,email,mobile,password,image)
-        res.status(201).send()
+        const userData = await createUser(username,email,mobile,password,image)
+        console.log(userData);
+        res.status(201).json(userData)
     } catch (error:any) {
         console.error(error);
         res.json({message:error.message})
@@ -38,7 +40,6 @@ export const userLogin = async(req:Request,res:Response)=>{
 export const profile = async(req:Request,res:Response)=>{
     try {
         const email = req.query.email?.toString()
-        console.log(email);        
         if(!email){
             return res.status(400).json({ message: 'Somthing Error' });
         }
@@ -46,6 +47,28 @@ export const profile = async(req:Request,res:Response)=>{
         res.json(userData)
     } catch (error:any) {
         throw new Error(error.message)      
+    }
+}
+
+export const profileUpdate = async(req:Request,res:Response)=>{
+    try {
+
+        const {username,email,mobile} = req.body
+        
+        const image = req.file?.filename
+        const userEmail = req.query.userEmail?.toString()
+        
+        if(!userEmail){
+            return res.status(400).json({ message:'No email provided'});
+        }
+        const userData = await updateUser(username,email,mobile,image,userEmail)
+        
+        res.json(userData)
+        
+        
+    } catch (error:any) {
+        console.log(error.message);
+        
     }
 }
 

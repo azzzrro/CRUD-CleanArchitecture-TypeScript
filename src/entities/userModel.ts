@@ -6,7 +6,7 @@ export interface UserInterface extends Document{
     mobile:string
     password:string
     image:any
-    isAdmin:boolean
+    date:string
 }
 
 
@@ -30,9 +30,9 @@ const userSchema:Schema = new Schema({
     image:{
         type:String
     },
-    isAdmin:{
-        type:Boolean,
-        default:false
+    date:{
+        type:String,
+        required:true
     }
 })
 

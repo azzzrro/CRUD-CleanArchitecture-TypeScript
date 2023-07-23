@@ -1,4 +1,4 @@
-import { UserInterface } from "../../entities/user/userModel";
+import { UserInterface } from "../../entities/userModel";
 import { findUserByEmail } from "../../repositories/userRepository";
 
 export const findUser = async(email:string):Promise<UserInterface | null>=>{

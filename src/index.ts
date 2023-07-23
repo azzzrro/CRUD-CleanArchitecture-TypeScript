@@ -3,6 +3,7 @@ import connectDB from './config/mongo';
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import userRoute from './interfaces/routes/userRoute';
+import adminRoute from './interfaces/routes/adminRoute';
 
 
 const app = express()
@@ -31,6 +32,7 @@ app.use(
 
 
 app.use('/',userRoute)
+app.use('/admin',adminRoute)
 
 const port:number = 5000;
 

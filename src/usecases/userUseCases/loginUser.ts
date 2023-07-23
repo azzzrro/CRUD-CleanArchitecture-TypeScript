@@ -1,7 +1,7 @@
 import { findUserByEmail } from "../../repositories/userRepository";
 import { matchPassword } from "../../services/bcrypt";
 import { generateAuthToken } from "../../middlewares/auth";
-import { UserInterface } from "../../entities/user/userModel";
+import { UserInterface } from "../../entities/userModel";
 
 export interface LoginResponse {
     userData: UserInterface;
