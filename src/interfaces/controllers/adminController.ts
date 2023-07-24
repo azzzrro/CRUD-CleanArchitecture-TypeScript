@@ -4,6 +4,7 @@ import { getUsers } from "../../usecases/adminUseCases/getUsers";
 import { getUpdateUser } from "../../usecases/adminUseCases/getUpdateUser";
 import { UserInterface } from "../../entities/userModel";
 import { adminUpdateUser } from "../../usecases/adminUseCases/updateUser";
+import { adminDeleteUser } from "../../usecases/adminUseCases/deleteUser";
 
 export const loginAdmin = async(req:Request,res:Response)=>{
     try {
@@ -48,5 +49,17 @@ export const updateUser = async(req:Request,res:Response)=>{
         res.json(response)
     } catch (error) {
         res.json({message:"Couldnt Update the User"})
+    }
+}
+
+export const deleteUser = async(req:Request,res:Response)=>{
+    try {
+        
+        const id=req.params.id
+        const response = await adminDeleteUser(id)
+        res.json(response)
+
+    } catch (error) {
+        res.json({message:"Couldnt delete the user"})
     }
 }

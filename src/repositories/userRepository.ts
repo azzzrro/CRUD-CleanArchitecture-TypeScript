@@ -37,3 +37,13 @@ export const updateOne = async (
     );
     return userData;
 };
+
+
+export const deleteOne = async(_id:string):Promise<UserInterface | object>=>{
+    const response = await userModel.findByIdAndDelete(_id)
+    if(response){
+        return response
+    }else{
+        return ({message:"User not found"})
+    }
+}
